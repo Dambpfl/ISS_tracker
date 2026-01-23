@@ -25,12 +25,12 @@ const issPath = L.polyline(issPositions, { color: 'red' }).addTo(map);
 const issMarker = L.marker([0, 0], {icon: issIcon}).addTo(map);
 
 setInterval(() => {
-    fetch('http://api.open-notify.org/iss-now.json')
+    fetch('https://api.wheretheiss.at/v1/satellites/25544')
     .then((response) => response.json())
     .then((data) => {
         console.log(data)
-        const latitude = data.iss_position.latitude
-        const longitude = data.iss_position.longitude
+        const latitude = data.latitude
+        const longitude = data.longitude
     
         issMarker.setLatLng([latitude, longitude])
         issPositions.push([latitude, longitude])
