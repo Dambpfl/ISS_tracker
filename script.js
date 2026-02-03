@@ -34,6 +34,11 @@ setInterval(() => {
     
         issMarker.setLatLng([latitude, longitude])
         issPositions.push([latitude, longitude])
+
+        if (issPositions.length > 500) {
+            issPositions.shift()
+        }
+
         issPath.setLatLngs(issPositions)
     })
 
