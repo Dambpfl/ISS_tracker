@@ -9,7 +9,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let issIcon = L.icon({
-    iconUrl: '/images/iss.png',
+    iconUrl: './images/iss.png',
     shadowUrl: null,
 
     iconSize:     [100, 100], // size of the icon
