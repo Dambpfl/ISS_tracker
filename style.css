@@ -101,4 +101,14 @@ body {
             height: auto;
         }
     }
+
+    @media (max-width: 380px) {
+        h1 {
+            font-size: 20px;
+
+            .iss-img {
+                width: 30px;
+            }
+        }
+    }
 }
