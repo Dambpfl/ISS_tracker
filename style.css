@@ -1,24 +1,104 @@
-html, body {
-    height: 100%;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+:root {
+    --dark-bg: #0a0a0a;
+    --darker-bg: #050505;
+    --accent: #FF6B35;
+    --text: #ffffff;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: var(--dark-bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.logo {
+    position: relative;
+    padding-left: 2.5rem;
+
+    .iss-logo {
+        width: 40px;
+        height: auto;
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
 
 #map {
     height: 85%;
     border-radius: 10px;
 }
 
-body {
-    background-color: rgb(32, 32, 32);
-}
 
 .main-body {
+    margin-top: 100px;
     padding: 10px;
     height: 97%;
 
     h1 {
         display: flex;
         justify-content: center;
-        color: white;
+        color: var(--text);
+        gap: 10px;
+        margin-bottom: 10px;
+
+        .iss-img {
+            width: 50px;
+            height: auto;
+        }
     }
 }

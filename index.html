@@ -3,16 +3,30 @@
     <head>
     <meta charset="UTF-8">
         <title>Suivi ISS</title>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
         <link rel="shortcut icon" href="earth.png" type="image/x-icon">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <nav class="navbar" id="navbar">
+            <a href="index.html" class="logo"><img class="iss-logo" src="/images/iss-logo.png" alt="ISS-logo"></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="equipage.html">Équipage</a></li>
+                <li><a href="position.html">Position</a></li>
+            </ul>
+        </nav>
         <div class="main-body">
-            <h1>Position actuelle de l’ISS 🌍</h1>
-            <div id="map"></div>
+            <h2>Suivez la position de l’ISS et son équipage</h2>
+            <p>
+                Dans la page « Position », vous pouvez retrouver la position actuelle de la Station spatiale internationale et suivre son déplacement autour de la Terre.<br>
+                La page « Équipage » présente quant à elle les astronautes actuellement présents à bord de l'ISS, avec leurs informations et leur rôle au sein de la mission.
+            </p><br>
+            
+            <h2>Qu'est-ce que l'ISS ?</h2>
+            <p>La Station spatiale internationale (ISS) est un laboratoire scientifique en orbite autour de la Terre, construit grâce à la collaboration de plusieurs agences spatiales, notamment la NASA, Roscosmos, l’ESA, la JAXA et l’Agence spatiale canadienne. Sa construction a commencé en 1998, et elle est habitée en permanence depuis novembre 2000. <br><br>
+                L'ISS permet aux astronautes de réaliser des expériences dans des conditions de microgravité. Ces recherches concernent notamment la médecine, la biologie, les matériaux et les technologies spatiales. En plus de son rôle scientifique, elle représente un exemple majeur de coopération internationale dans l'espace. Depuis le début de sa présence humaine continue, plus de 290 personnes provenant de 26 pays ont séjourné à bord. <br><br>
+                La station se déplace autour de la Terre à environ 28 000 km/h et effectue une orbite en environ 90 minutes, ce qui lui permet de faire près de 16 fois le tour de la Terre en une journée.
+            </p>
         </div>
     </body>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
 </html>
