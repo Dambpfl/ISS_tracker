@@ -22,7 +22,15 @@
     </nav>
     <div class="main-body">
         <h1>ISS en temps réel <img class="iss-img" src="./images/iss.png" alt="ISS-img"></h1>
-        <div id="map"></div>
+        <div class="data">
+            <div id="map"></div>
+            <div id="iss-data">
+                <p>Altitude : <span id="altitude">--</span> km</p>
+                <p>Vitesse : <span id="velocity">--</span> km/h</p>
+                <p>Latitude : <span id="latitude">--</span>°</p>
+                <p>Longitude : <span id="longitude">--</span>°</p>
+            </div>
+        </div>
     </div>
 </body>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

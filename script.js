@@ -42,6 +42,18 @@ setInterval(() => {
             }
 
             issPath.setLatLngs(issPositions)
+
+            document.getElementById('altitude').textContent =
+                data.altitude.toFixed(2);
+
+            document.getElementById('velocity').textContent =
+                data.velocity.toFixed(2);
+
+            document.getElementById('latitude').textContent =
+                data.latitude.toFixed(4);
+
+            document.getElementById('longitude').textContent =
+                data.longitude.toFixed(4);
         })
 
         .catch((error) => {
