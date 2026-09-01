@@ -3,9 +3,11 @@ const map = L.map('map', {
     zoom: 2
 });
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+    minZoom: 1,
+    maxZoom: 20,
+    subdomains: ['a', 'b', 'c'],
+    attribution: 'données © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> - rendu <a href="https://openstreetmap.fr/">OSM France</a>'
 }).addTo(map);
 
 let issIcon = L.icon({
