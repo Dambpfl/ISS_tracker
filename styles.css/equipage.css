@@ -1,0 +1,128 @@
+.crew {
+    padding: 0 6vw 5rem;
+}
+
+.flag {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.agency-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+}
+
+.role-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.commander-card {
+    display: flex;
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.commander-photo {
+    width: 280px;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+}
+
+.commander-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 2rem 2.2rem;
+}
+
+.role-badge {
+    background-color: var(--accent);
+    color: var(--void);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+}
+
+.commander-info h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.crew-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.crew-card {
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.crew-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+}
+
+.crew-info {
+    padding: 1.2rem 1.4rem 1.5rem;
+}
+
+.crew-info h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+}
+
+.crew-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+    .commander-card {
+        flex-direction: column;
+    }
+
+    .commander-photo {
+        width: 100%;
+        height: 260px;
+        aspect-ratio: auto;
+    }
+
+    .commander-info {
+        padding: 1.5rem;
+    }
+}

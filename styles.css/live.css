@@ -1,0 +1,12 @@
+.twitch-container {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.twitch-container iframe {
+    max-width: 100%;
+    border: none;
+    border-radius: 15px;
+}

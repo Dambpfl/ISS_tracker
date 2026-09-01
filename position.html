@@ -4,36 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Position</title>
+    <title>Position — Suivi ISS</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="shortcut icon" href="./images/earth.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles.css/common.css">
+    <link rel="stylesheet" href="./styles.css/position.css">
 </head>
 
 <body>
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Navigation principale">
         <ul class="nav-links">
-            <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
-            <li><a href="equipage.html"><i class="fa-solid fa-users"></i></a></li>
-            <li><a href="position.html" class="active"><i class="fa-solid fa-location-crosshairs"></i></a></li>
-            <li><a href="live.html"><i class="fa-solid fa-video"></i></a></li>
+            <li><a href="index.html" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="equipage.html" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="position.html" class="active" aria-label="Position en temps réel"><i
+                        class="fa-solid fa-location-crosshairs"></i></a></li>
+            <li><a href="live.html" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
         </ul>
     </nav>
+
     <div class="main-body">
         <h1>ISS en temps réel <img class="iss-img" src="./images/iss.png" alt="ISS-img"></h1>
+
         <div class="data">
             <div id="map"></div>
+
             <div id="iss-data">
-                <p>Altitude : <span id="altitude">--</span> km</p>
-                <p>Vitesse : <span id="velocity">--</span> km/h</p>
-                <p>Latitude : <span id="latitude">--</span>°</p>
-                <p>Longitude : <span id="longitude">--</span>°</p>
+                <p class="panel-title">
+                    <span class="live-dot" aria-hidden="true"></span>
+                    En direct
+                </p>
+                <p>
+                    <span class="data-label">Altitude</span>
+                    <span class="data-value"><span id="altitude">--</span> km</span>
+                </p>
+                <p>
+                    <span class="data-label">Vitesse</span>
+                    <span class="data-value"><span id="velocity">--</span> km/h</span>
+                </p>
+                <p>
+                    <span class="data-label">Latitude</span>
+                    <span class="data-value"><span id="latitude">--</span>°</span>
+                </p>
+                <p>
+                    <span class="data-label">Longitude</span>
+                    <span class="data-value"><span id="longitude">--</span>°</span>
+                </p>
             </div>
         </div>
     </div>
+    <footer class="site-footer">
+        <p>Mise à jour 01/09/2026.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="script.js"></script>
 
 </html>
