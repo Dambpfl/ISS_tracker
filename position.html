@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <nav class="navbar" id="navbar">
-        <a href="index.html" class="logo"><img class="iss-logo" src="./images/iss-logo.png" alt="ISS-logo"></a>
         <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="equipage.html">Équipage</a></li>
-            <li><a href="position.html">Position</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="equipage.html"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="position.html" class="active"><i class="fa-solid fa-location-crosshairs"></i></a></li>
         </ul>
     </nav>
     <div class="main-body">
@@ -23,6 +24,7 @@
         <div id="map"></div>
     </div>
 </body>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
 </html>
