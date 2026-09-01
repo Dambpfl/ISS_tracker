@@ -65,6 +65,18 @@ body {
     border-radius: 10px;
 }
 
+.twitch-container {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.twitch-container iframe {
+    max-width: 100%;
+    border: none;
+    border-radius: 15px;
+}
 
 .main-body {
     padding: 10px;
@@ -134,13 +146,13 @@ body {
 
         .astronaute {
             width: 300px;
-            
+
             .photo-astro {
                 width: 100px;
                 height: 150px;
             }
         }
-        
+
     }
 
     @media (max-width: 380px) {
@@ -155,7 +167,7 @@ body {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1030px) {
     .navbar {
         left: 50%;
         right: auto;
