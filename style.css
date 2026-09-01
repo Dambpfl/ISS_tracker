@@ -100,6 +100,56 @@ body {
             width: 50px;
             height: auto;
         }
+    
+    }
+
+    .astronautes {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+        margin: 20px;
+    }
+    
+    .astronaute {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 420px;
+
+        .photo-astro {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10%;
+        }
+
+        .infos {
+            display: flex;
+            flex-direction: column;
+            width: 180px;
+        }
+
+        p {
+            margin: 0;
+            width: 200px;
+        }
+
+        p img {
+            width: 20px;
+        }
+    }
+
+    @media (max-width: 1345px) {
+        .astronautes {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 910px) {
+        .astronautes {
+            grid-template-columns: 1fr;
+        }
     }
 
     @media (max-width: 380px) {
