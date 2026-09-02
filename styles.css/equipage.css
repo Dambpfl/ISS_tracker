@@ -54,7 +54,7 @@
 
 .role-badge {
     background-color: var(--accent);
-    color: var(--void);
+    color: var(--on-accent);
     font-weight: 600;
     font-size: 0.8rem;
     padding: 0.35rem 0.8rem;

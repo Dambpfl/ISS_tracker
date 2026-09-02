@@ -14,20 +14,31 @@
     --text: #F2EFEA;
     --muted: #9096A3;
     --line: rgba(255, 255, 255, 0.09);
+    --glass: rgba(16, 17, 22, 0.75);
+    --on-accent: #07070a;
 
     --font-display: "Space Grotesk", "Inter", sans-serif;
     --font-body: "Inter", sans-serif;
 }
 
+html[data-theme="light"] {
+    --void: #f5f3ef;
+    --panel: #ffffff;
+    --accent-soft: rgba(255, 107, 53, 0.14);
+    --text: #16171c;
+    --muted: #5c5f6b;
+    --line: rgba(15, 15, 20, 0.1);
+    --glass: rgba(255, 255, 255, 0.75);
+}
+
 html {
     height: 100%;
     scroll-behavior: smooth;
+    transition: background-color 0.2s ease;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    min-height: 100%;
     background-color: var(--void);
     color: var(--text);
     font-family: var(--font-body);
@@ -46,19 +57,13 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-
-main {
-    flex: 1;
-}
-
 /* ---------- Navigation ---------- */
 
 .navbar {
     position: fixed;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(16, 17, 22, 0.75);
+    right: 20px;
+    background-color: var(--glass);
     backdrop-filter: blur(10px);
     border: 1px solid var(--line);
     border-radius: 999px;
@@ -91,7 +96,34 @@ main {
 
 .nav-links a.active {
     background-color: var(--accent);
-    color: var(--void);
+    color: var(--on-accent);
+}
+
+/* ---------- Bouton clair / sombre ---------- */
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--accent);
 }
 
 /* ---------- Indicateur "en direct" (partagé entre pages) ---------- */
@@ -128,7 +160,7 @@ main {
 
 .page-header {
     padding: 8rem 6vw 3rem;
-    max-width: 1500px;
+    max-width: 760px;
 }
 
 .page-kicker {

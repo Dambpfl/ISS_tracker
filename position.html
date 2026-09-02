@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Position — Suivi ISS</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -14,6 +19,9 @@
     <link rel="stylesheet" href="./styles.css/position.css">
 </head>
 <body>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
+        <i class="fa-solid fa-moon"></i>
+    </button>
     <nav class="navbar" id="navbar" aria-label="Navigation principale">
         <ul class="nav-links">
             <li><a href="index.html" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
@@ -60,5 +68,6 @@
     </footer>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
+    <script src="theme.js"></script>
 </body>
 </html>

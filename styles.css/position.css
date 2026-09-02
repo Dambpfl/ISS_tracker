@@ -17,6 +17,10 @@
     filter: invert(92%) hue-rotate(180deg) brightness(0.95) contrast(0.9);
 }
 
+html[data-theme="light"] #map {
+    filter: none;
+}
+
 #iss-data {
     position: absolute;
     top: 20px;
@@ -24,7 +28,7 @@
     z-index: 1000;
     min-width: 230px;
     padding: 1.1rem 1.3rem;
-    background-color: rgba(16, 17, 22, 0.75);
+    background-color: var(--glass);
     backdrop-filter: blur(10px);
     border: 1px solid var(--line);
     border-radius: 14px;

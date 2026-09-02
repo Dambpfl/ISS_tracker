@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
     <title>Équipage — Suivi ISS</title>
     <link rel="shortcut icon" href="./images/earth.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +19,9 @@
 </head>
 
 <body>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
+        <i class="fa-solid fa-moon"></i>
+    </button>
     <nav class="navbar" id="navbar" aria-label="Navigation principale">
         <ul class="nav-links">
             <li><a href="index.html" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
@@ -106,5 +114,6 @@
     <footer class="site-footer">
         <p>Mise à jour 02/09/2026.</p>
     </footer>
+    <script src="theme.js"></script>
 </body>
 </html>
