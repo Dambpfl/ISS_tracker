@@ -7,8 +7,12 @@
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.setAttribute('data-theme', 'light');
         }
+        var storedLang = localStorage.getItem('lang');
+        if (storedLang) {
+            document.documentElement.setAttribute('lang', storedLang);
+        }
     </script>
-    <title>Live vidéo — Suivi ISS</title>
+    <title data-i18n="live.title">Live vidéo — Suivi ISS</title>
     <link rel="shortcut icon" href="./images/earth.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,21 +22,24 @@
     <link rel="stylesheet" href="./styles.css/live.css">
 </head>
 <body>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
-        <i class="fa-solid fa-moon"></i>
-    </button>
+    <div class="controls-left">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="lang-toggle" type="button" class="lang-toggle" aria-label="Choisir la langue">FR</button>
+    </div>
     <nav class="navbar" id="navbar" aria-label="Navigation principale">
         <ul class="nav-links">
-            <li><a href="index.html" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
-            <li><a href="equipage.html" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
-            <li><a href="position.html" aria-label="Position en temps réel"><i
+            <li><a href="index.html" data-i18n-aria="nav.home" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="equipage.html" data-i18n-aria="nav.crew" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="position.html" data-i18n-aria="nav.position" aria-label="Position en temps réel"><i
                         class="fa-solid fa-location-crosshairs"></i></a></li>
-            <li><a href="live.html" class="active" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
+            <li><a href="live.html" class="active" data-i18n-aria="nav.live" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
         </ul>
     </nav>
     <main>
         <header class="page-header">
-            <p class="page-kicker">Live vidéo</p>
+            <p class="page-kicker" data-i18n="live.kicker">Live vidéo</p>
         </header>
         <div class="live-stage">
             <div class="player-frame">
@@ -41,9 +48,10 @@
             </div>
         </div>
     </main>
-    <footer class="site-footer">
-        <p>Mise à jour 02/09/2026.</p>
+    <footer class="site-footer" data-i18n="footer.update">
+        <p>Mise à jour 09/2026.</p>
     </footer>
+    <script src="i18n.js"></script>
     <script src="theme.js"></script>
 </body>
 </html>

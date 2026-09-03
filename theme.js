@@ -3,12 +3,19 @@
     var toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
 
+    function label(key, fallback) {
+        return (typeof t === 'function') ? t(key) : fallback;
+    }
+
     function updateIcon() {
         var isLight = root.getAttribute('data-theme') === 'light';
         toggle.innerHTML = isLight
             ? '<i class="fa-solid fa-sun"></i>'
             : '<i class="fa-solid fa-moon"></i>';
-        toggle.setAttribute('aria-label', isLight ? 'Passer en mode sombre' : 'Passer en mode clair');
+        toggle.setAttribute(
+            'aria-label',
+            isLight ? label('theme.toDark', 'Passer en mode sombre') : label('theme.toLight', 'Passer en mode clair')
+        );
     }
 
     toggle.addEventListener('click', function () {
@@ -24,4 +31,5 @@
     });
 
     updateIcon();
+    window.updateThemeToggleLabel = updateIcon;
 })();

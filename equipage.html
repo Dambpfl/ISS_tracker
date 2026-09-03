@@ -7,8 +7,12 @@
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.setAttribute('data-theme', 'light');
         }
+        var storedLang = localStorage.getItem('lang');
+        if (storedLang) {
+            document.documentElement.setAttribute('lang', storedLang);
+        }
     </script>
-    <title>Équipage — Suivi ISS</title>
+    <title data-i18n="equipage.title">Équipage — Suivi ISS</title>
     <link rel="shortcut icon" href="./images/earth.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css/common.css">
@@ -19,30 +23,33 @@
 </head>
 
 <body>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
-        <i class="fa-solid fa-moon"></i>
-    </button>
+    <div class="controls-left">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="lang-toggle" type="button" class="lang-toggle" aria-label="Choisir la langue">FR</button>
+    </div>
     <nav class="navbar" id="navbar" aria-label="Navigation principale">
         <ul class="nav-links">
-            <li><a href="index.html" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
-            <li><a href="equipage.html" class="active" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
-            <li><a href="position.html" aria-label="Position en temps réel"><i
+            <li><a href="index.html" data-i18n-aria="nav.home" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="equipage.html" class="active" data-i18n-aria="nav.crew" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="position.html" data-i18n-aria="nav.position" aria-label="Position en temps réel"><i
                         class="fa-solid fa-location-crosshairs"></i></a></li>
-            <li><a href="live.html" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
+            <li><a href="live.html" data-i18n-aria="nav.live" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
         </ul>
     </nav>
     <main>
         <header class="page-header">
-            <p class="page-kicker">Équipage</p>
-            <h1>Sept personnes vivent actuellement à bord de l'ISS.</h1>
-            <p class="page-lead">Les visages derrière la mission.</p>
+            <p class="page-kicker" data-i18n="equipage.kicker">Équipage</p>
+            <h1 data-i18n="equipage.h1">Sept personnes vivent actuellement à bord de l'ISS.</h1>
+            <p class="page-lead" data-i18n="equipage.lead">Les visages derrière la mission.</p>
         </header>
         <section class="crew" aria-label="Équipage actuel">
             <article class="commander-card">
                 <img class="commander-photo" src="./images/jm.webp" alt="Portrait de Jessica Meir">
                 <div class="commander-info">
-                    <span class="role-badge">Commandante</span>
-                    <h2>Jessica Meir <img class="flag" src="https://flagcdn.com/w40/us.png" alt="États-Unis"></h2>
+                    <span class="role-badge" data-i18n="role.commander">Commandante</span>
+                    <h2>Jessica Meir <img class="flag" src="https://flagcdn.com/w40/us.png" data-i18n-alt="flag.us" alt="États-Unis"></h2>
                     <span class="agency-badge">NASA</span>
                 </div>
             </article>
@@ -51,60 +58,60 @@
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/am.webp" alt="Portrait de Anil Menon">
                     <div class="crew-info">
-                        <h3>Anil Menon <img class="flag" src="https://flagcdn.com/w40/us.png" alt="États-Unis"></h3>
+                        <h3>Anil Menon <img class="flag" src="https://flagcdn.com/w40/us.png" data-i18n-alt="flag.us" alt="États-Unis"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">NASA</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/ja.jpg" alt="Portrait de Jack Hathaway">
                     <div class="crew-info">
-                        <h3>Jack Hathaway <img class="flag" src="https://flagcdn.com/w40/us.png" alt="États-Unis"></h3>
+                        <h3>Jack Hathaway <img class="flag" src="https://flagcdn.com/w40/us.png" data-i18n-alt="flag.us" alt="États-Unis"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">NASA</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/sa.webp" alt="Portrait de Sophie Adenot">
                     <div class="crew-info">
-                        <h3>Sophie Adenot <img class="flag" src="https://flagcdn.com/w40/fr.png" alt="France"></h3>
+                        <h3>Sophie Adenot <img class="flag" src="https://flagcdn.com/w40/fr.png" data-i18n-alt="flag.fr" alt="France"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">ESA</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/ak.jpg" alt="Portrait de Anna Kikina">
                     <div class="crew-info">
-                        <h3>Anna Kikina <img class="flag" src="https://flagcdn.com/w40/ru.png" alt="Russie"></h3>
+                        <h3>Anna Kikina <img class="flag" src="https://flagcdn.com/w40/ru.png" data-i18n-alt="flag.ru" alt="Russie"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">Roscosmos</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/af.webp" alt="Portrait de Andrey Fedyaev">
                     <div class="crew-info">
-                        <h3>Andrey Fedyaev <img class="flag" src="https://flagcdn.com/w40/ru.png" alt="Russie"></h3>
+                        <h3>Andrey Fedyaev <img class="flag" src="https://flagcdn.com/w40/ru.png" data-i18n-alt="flag.ru" alt="Russie"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">Roscosmos</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
                 <article class="crew-card">
                     <img class="crew-photo" src="./images/pyd.webp" alt="Portrait de Pyotr Dubrov">
                     <div class="crew-info">
-                        <h3>Pyotr Dubrov <img class="flag" src="https://flagcdn.com/w40/ru.png" alt="Russie"></h3>
+                        <h3>Pyotr Dubrov <img class="flag" src="https://flagcdn.com/w40/ru.png" data-i18n-alt="flag.ru" alt="Russie"></h3>
                         <div class="crew-meta">
                             <span class="agency-badge">Roscosmos</span>
-                            <span class="role-text">Ingénieur de vol</span>
+                            <span class="role-text" data-i18n="role.flightEngineer">Ingénieur de vol</span>
                         </div>
                     </div>
                 </article>
@@ -112,8 +119,9 @@
         </section>
     </main>
     <footer class="site-footer">
-        <p>Mise à jour 02/09/2026.</p>
+        <p data-i18n="footer.update">Mise à jour 09/2026.</p>
     </footer>
+    <script src="i18n.js"></script>
     <script src="theme.js"></script>
 </body>
 </html>
