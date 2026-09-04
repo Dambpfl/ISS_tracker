@@ -186,6 +186,15 @@ button:disabled {
     margin-bottom: 1.5rem;
 }
 
+.gallery-toolbar {
+    display: flex;
+    margin-bottom: 1.2rem;
+}
+
+.gallery-toolbar select {
+    min-width: 220px;
+}
+
 /* ---------- Galerie ---------- */
 
 .rover-gallery {

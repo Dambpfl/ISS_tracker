@@ -4,6 +4,8 @@
     var PHOTOS_PAR_RECHERCHE = 100;
 
     var photosCourantes = [];
+    var photosToutes = []; // toutes les photos valides du sol courant, avant filtre/plafond
+    var cameraFilterValue = '';
     var indexPhotoActive = 0;
     var chargementEnCours = false;
     var dernierElementFocus = null;
@@ -29,11 +31,13 @@
         return isNaN(d.getTime()) ? null : val;
     }
 
-    // N'accepte que des URLs d'images https, pour éviter les schémas javascript:/data: douteux.
+    // N'accepte que des URLs d'images https (les liens http hérités sont forcés en
+    // https plutôt que rejetés), pour éviter les schémas javascript:/data: douteux.
     function urlImageValide(val) {
         if (typeof val !== 'string') return null;
         try {
             var u = new URL(val, window.location.href);
+            if (u.protocol === 'http:') u.protocol = 'https:';
             return u.protocol === 'https:' ? u.href : null;
         } catch (e) {
             return null;
@@ -52,6 +56,7 @@
     var searchInputLabel = document.getElementById('searchInputLabel');
     var searchBtn = document.getElementById('searchBtn');
     var clearCacheBtn = document.getElementById('clearCacheBtn');
+    var cameraFilter = document.getElementById('cameraFilter');
     var statusEl = document.getElementById('status');
     var galleryEl = document.getElementById('gallery');
     var modal = document.getElementById('imageModal');
@@ -228,8 +233,11 @@
         if (chargementEnCours) return;
         var photosEnCache = await getCacheValide(getDbKey());
         if (photosEnCache && photosEnCache.length > 0) {
-            setStatus(tf('rovers.cached', { count: photosEnCache.length }));
-            afficherGalerie(photosEnCache);
+            photosToutes = photosEnCache;
+            cameraFilterValue = '';
+            populerFiltreCamera(photosToutes);
+            var affichees = appliquerFiltreEtAfficher();
+            setStatus(tf('rovers.cached', { count: affichees.length }));
         } else {
             await chargerPhotos();
         }
@@ -269,14 +277,18 @@
             if (rawImages.length === 0) {
                 galleryEl.innerHTML = '';
                 photosCourantes = [];
+                photosToutes = [];
+                populerFiltreCamera(photosToutes);
                 setStatus(tf('rovers.none', { sol: sol }));
                 return;
             }
 
-            var photosAStocker = selectionnerPhotos(rawImages, sol);
-            await setCacheAvecExpiration(getDbKey(), photosAStocker);
-            setStatus(tf('rovers.found', { count: photosAStocker.length, sol: sol }));
-            afficherGalerie(photosAStocker);
+            photosToutes = extraireToutesPhotos(rawImages, sol);
+            cameraFilterValue = '';
+            await setCacheAvecExpiration(getDbKey(), photosToutes);
+            populerFiltreCamera(photosToutes);
+            var affichees = appliquerFiltreEtAfficher();
+            setStatus(tf('rovers.found', { count: affichees.length, sol: sol }));
         } catch (error) {
             console.error(error);
             setStatus(tf('rovers.error', { message: error.message }));
@@ -287,12 +299,10 @@
         }
     }
 
-    // Sélectionne jusqu'à PHOTOS_PAR_RECHERCHE photos en privilégiant une caméra
-    // différente à chaque fois, puis complète avec les images restantes si besoin.
-    // Chaque valeur issue de l'API est validée / nettoyée avant d'être conservée.
-    function selectionnerPhotos(rawImages, sol) {
+    // Extrait et valide toutes les photos utilisables du sol (dédoublonnées par URL),
+    // sans plafond : le plafond n'est appliqué qu'à l'affichage, après filtre éventuel.
+    function extraireToutesPhotos(rawImages, sol) {
         var photos = [];
-        var camerasVues = new Set();
 
         function extraire(img) {
             var camObj = img.camera || {};
@@ -319,26 +329,93 @@
             };
         }
 
+        var urlsVues = new Set();
         rawImages.forEach(function (img) {
-            if (photos.length >= PHOTOS_PAR_RECHERCHE) return;
             var photo = extraire(img);
-            if (photo.url && !camerasVues.has(photo.camera)) {
-                camerasVues.add(photo.camera);
+            if (photo.url && !urlsVues.has(photo.url)) {
+                urlsVues.add(photo.url);
                 photos.push(photo);
             }
         });
 
-        if (photos.length < PHOTOS_PAR_RECHERCHE) {
-            rawImages.forEach(function (img) {
-                if (photos.length >= PHOTOS_PAR_RECHERCHE) return;
-                var photo = extraire(img);
-                if (photo.url && !photos.some(function (p) { return p.url === photo.url; })) {
-                    photos.push(photo);
-                }
+        return photos;
+    }
+
+    // Construit la liste des caméras disponibles à partir des photos déjà validées
+    // (aucune saisie libre possible : le filtre ne propose que des valeurs qu'on a
+    // nous-mêmes générées), et reconstruit le <select> via les API du DOM.
+    function populerFiltreCamera(photos) {
+        var camerasVues = new Set();
+        photos.forEach(function (p) {
+            camerasVues.add(p.camera || t('rovers.unknownCamera'));
+        });
+        var cameras = Array.from(camerasVues).sort(function (a, b) {
+            return a.localeCompare(b, getLang());
+        });
+
+        cameraFilter.innerHTML = '';
+        var optionToutes = document.createElement('option');
+        optionToutes.value = '';
+        optionToutes.textContent = t('rovers.allCameras');
+        cameraFilter.appendChild(optionToutes);
+
+        cameras.forEach(function (cam) {
+            var opt = document.createElement('option');
+            opt.value = cam;
+            opt.textContent = cam;
+            cameraFilter.appendChild(opt);
+        });
+
+        // Si la caméra actuellement sélectionnée n'existe plus dans ce nouveau sol,
+        // on retombe proprement sur "Toutes les caméras".
+        if (cameraFilterValue && cameras.indexOf(cameraFilterValue) === -1) {
+            cameraFilterValue = '';
+        }
+        cameraFilter.value = cameraFilterValue;
+    }
+
+    // Plafonne à PHOTOS_PAR_RECHERCHE en privilégiant une caméra différente à chaque
+    // fois quand plusieurs sont mélangées, sinon prend simplement les premières.
+    function limiterPhotos(photos) {
+        if (photos.length <= PHOTOS_PAR_RECHERCHE) return photos;
+
+        var result = [];
+        var camerasVues = new Set();
+
+        photos.forEach(function (p) {
+            if (result.length >= PHOTOS_PAR_RECHERCHE) return;
+            var cam = p.camera || t('rovers.unknownCamera');
+            if (!camerasVues.has(cam)) {
+                camerasVues.add(cam);
+                result.push(p);
+            }
+        });
+
+        if (result.length < PHOTOS_PAR_RECHERCHE) {
+            photos.forEach(function (p) {
+                if (result.length >= PHOTOS_PAR_RECHERCHE) return;
+                if (result.indexOf(p) === -1) result.push(p);
             });
         }
 
-        return photos;
+        return result;
+    }
+
+    // Applique le filtre caméra actif (valeur re-vérifiée contre la liste connue,
+    // jamais prise telle quelle) puis affiche le résultat plafonné.
+    function appliquerFiltreEtAfficher() {
+        var camerasConnues = Array.prototype.map.call(cameraFilter.options, function (o) { return o.value; });
+        if (cameraFilterValue && camerasConnues.indexOf(cameraFilterValue) === -1) {
+            cameraFilterValue = '';
+        }
+
+        var filtrees = cameraFilterValue
+            ? photosToutes.filter(function (p) { return (p.camera || t('rovers.unknownCamera')) === cameraFilterValue; })
+            : photosToutes;
+
+        var affichees = limiterPhotos(filtrees);
+        afficherGalerie(affichees);
+        return affichees;
     }
 
     // Construit chaque carte via les API du DOM (textContent / setAttribute) plutôt
@@ -470,6 +547,9 @@
         await delCache(getDbKey());
         galleryEl.innerHTML = '';
         photosCourantes = [];
+        photosToutes = [];
+        cameraFilterValue = '';
+        populerFiltreCamera(photosToutes);
         setStatus(t('rovers.cacheCleared'));
     }
 
@@ -487,6 +567,10 @@
     roverSelect.addEventListener('change', changerRover);
     searchBtn.addEventListener('click', lancerRecherche);
     clearCacheBtn.addEventListener('click', viderCache);
+    cameraFilter.addEventListener('change', function () {
+        cameraFilterValue = cameraFilter.value;
+        appliquerFiltreEtAfficher();
+    });
     modalClose.addEventListener('click', fermerPleinEcran);
     modalPrev.addEventListener('click', photoPrecedente);
     modalNext.addEventListener('click', photoSuivante);
@@ -494,12 +578,13 @@
         if (e.target === modal) fermerPleinEcran();
     });
 
-    // Retraduit la galerie, la légende de la modale et le libellé du champ actif
-    // sans relancer de requête réseau
+    // Retraduit la galerie, la légende de la modale, le libellé du champ actif et
+    // les options du filtre caméra, sans relancer de requête réseau
     document.addEventListener('langchange', function () {
         searchInputLabel.textContent = t(searchMode === 'sol' ? 'rovers.solLabel' : 'rovers.dateLabel');
-        if (photosCourantes.length > 0) {
-            afficherGalerie(photosCourantes);
+        if (photosToutes.length > 0) {
+            populerFiltreCamera(photosToutes);
+            appliquerFiltreEtAfficher();
             if (modal.classList.contains('active')) mettreAJourModal();
         }
     });
