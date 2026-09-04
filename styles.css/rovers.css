@@ -1,0 +1,353 @@
+.rovers-main {
+    padding: 0 6vw 5rem;
+}
+
+.rovers-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1.2rem;
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.mode-switch {
+    display: flex;
+    gap: 0.15rem;
+    background-color: var(--void);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.25rem;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+.mode-btn {
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0 0.85rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.mode-btn:hover {
+    color: var(--text);
+}
+
+.mode-btn.active {
+    background-color: var(--accent);
+    color: var(--on-accent);
+}
+
+.stepper,
+#dateInput {
+    height: 42px;
+    box-sizing: border-box;
+}
+
+#solModeWrap[hidden],
+#dateInput[hidden] {
+    display: none;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.control-group label {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+select,
+input[type="number"],
+input[type="date"] {
+    background-color: var(--void);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 0.7rem;
+    height: 42px;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color-scheme: dark;
+}
+
+html[data-theme="light"] select,
+html[data-theme="light"] input[type="number"],
+html[data-theme="light"] input[type="date"] {
+    color-scheme: light;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.stepper input[type="number"] {
+    width: 80px;
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.stepper input[type="number"]::-webkit-outer-spin-button,
+.stepper input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.stepper button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--void);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.stepper button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-accent,
+.btn-secondary,
+.btn-danger {
+    border: none;
+    border-radius: 8px;
+    padding: 0 1rem;
+    height: 42px;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: var(--on-accent);
+}
+
+.btn-accent:hover {
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-danger {
+    background-color: transparent;
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.4);
+    margin-left: auto;
+}
+
+.btn-danger:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.rovers-status {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- Galerie ---------- */
+
+.rover-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.rover-card {
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    font: inherit;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.rover-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+.rover-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    background-color: var(--void);
+}
+
+.rover-card-body {
+    padding: 0.9rem 1rem;
+}
+
+.rover-card-body strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+}
+
+.rover-card-body p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0.15rem 0;
+}
+
+/* ---------- Modale plein écran ---------- */
+
+.rover-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background-color: rgba(7, 7, 10, 0.94);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rover-modal.active {
+    display: flex;
+}
+
+.modal-img {
+    max-width: 85%;
+    max-height: 78vh;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.modal-caption {
+    margin-top: 1rem;
+    color: #d8d8dc;
+    font-size: 0.85rem;
+    text-align: center;
+    max-width: 80vw;
+}
+
+.modal-close,
+.modal-nav {
+    background-color: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.modal-close:hover,
+.modal-nav:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 1.1rem;
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.modal-nav-left {
+    left: 20px;
+}
+
+.modal-nav-right {
+    right: 20px;
+}
+
+@media (max-width: 700px) {
+    .rovers-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-danger {
+        margin-left: 0;
+    }
+
+    .modal-nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-close {
+        top: 12px;
+        right: 12px;
+    }
+
+    .modal-nav-left {
+        left: 12px;
+    }
+
+    .modal-nav-right {
+        right: 12px;
+    }
+}

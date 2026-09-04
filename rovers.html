@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+        var storedLang = localStorage.getItem('lang');
+        if (storedLang) {
+            document.documentElement.setAttribute('lang', storedLang);
+        }
+    </script>
+    <title data-i18n="rovers.title">Rovers martiens — Suivi ISS</title>
+    <link rel="shortcut icon" href="./images/earth.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css/common.css">
+    <link rel="stylesheet" href="./styles.css/rovers.css">
+</head>
+
+<body>
+    <div class="controls-left">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Passer en mode clair">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="lang-toggle" type="button" class="lang-toggle" aria-label="Choisir la langue">FR</button>
+    </div>
+
+    <nav class="navbar" id="navbar" aria-label="Navigation principale">
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n-aria="nav.home" aria-label="Accueil"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="equipage.html" data-i18n-aria="nav.crew" aria-label="Équipage"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="position.html" data-i18n-aria="nav.position" aria-label="Position en temps réel"><i class="fa-solid fa-location-crosshairs"></i></a></li>
+            <li><a href="live.html" data-i18n-aria="nav.live" aria-label="Live vidéo"><i class="fa-solid fa-video"></i></a></li>
+            <li><a href="rovers.html" class="active" data-i18n-aria="nav.rovers" aria-label="Rovers"><i class="fa-solid fa-truck-monster"></i></a></li>
+        </ul>
+    </nav>
+    <main>
+
+        <header class="page-header">
+            <p class="page-kicker" data-i18n="rovers.kicker">Exploration martienne</p>
+            <h1 data-i18n="rovers.h1">Photos des rovers sur Mars</h1>
+            <p class="page-lead" data-i18n="rovers.lead">Parcourez les images brutes envoyées par Curiosity et Perseverance, jour après jour.</p>
+        </header>
+    
+        <div class="rovers-main">
+            <div class="rovers-toolbar">
+                <div class="control-group">
+                    <label for="roverSelect" data-i18n="rovers.roverLabel">Rover</label>
+                    <select id="roverSelect">
+                        <option value="perseverance" data-i18n="rovers.perseverance">Perseverance</option>
+                        <option value="curiosity" data-i18n="rovers.curiosity">Curiosity</option>
+                    </select>
+                </div>
+    
+                <div class="control-group">
+                    <label data-i18n="rovers.modeLabel">Rechercher par</label>
+                    <div class="mode-switch" role="group" data-i18n-aria="rovers.modeLabel" aria-label="Rechercher par">
+                        <button type="button" id="modeSolBtn" class="mode-btn active" data-i18n="rovers.solLabel">Sol</button>
+                        <button type="button" id="modeDateBtn" class="mode-btn" data-i18n="rovers.dateLabel">Date Terre</button>
+                    </div>
+                </div>
+    
+                <div class="control-group">
+                    <label for="solInput" id="searchInputLabel" data-i18n="rovers.solLabel">Sol</label>
+                    <div class="stepper" id="solModeWrap">
+                        <button type="button" id="solMinus" aria-label="-1"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="solInput" min="0" value="1">
+                        <button type="button" id="solPlus" aria-label="+1"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <input type="date" id="dateInput" hidden>
+                </div>
+    
+                <button type="button" id="searchBtn" class="btn-accent" data-i18n="rovers.search">Rechercher</button>
+    
+                <button type="button" id="clearCacheBtn" class="btn-danger" data-i18n="rovers.clearCache">Vider le cache</button>
+            </div>
+    
+            <p id="status" class="rovers-status" data-i18n="rovers.loading">Chargement...</p>
+    
+            <div class="rover-gallery" id="gallery"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p data-i18n="footer.update">Mise à jour 09/2026</p>
+    </footer>
+
+    <div id="imageModal" class="rover-modal" role="dialog" aria-modal="true" aria-label="Vue plein écran">
+        <button class="modal-close" id="modalClose" type="button" data-i18n-aria="rovers.close" aria-label="Fermer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="modal-nav modal-nav-left" id="modalPrev" type="button" data-i18n-aria="rovers.prev" aria-label="Photo précédente">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav modal-nav-right" id="modalNext" type="button" data-i18n-aria="rovers.next" aria-label="Photo suivante">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <img id="modalImg" class="modal-img" src="" alt="">
+        <p id="modalCaption" class="modal-caption"></p>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="theme.js"></script>
+    <script src="rovers.js"></script>
+</body>
+
+</html>

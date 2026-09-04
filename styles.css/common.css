@@ -257,7 +257,7 @@ button:focus-visible {
 .page-lead {
     color: var(--muted);
     font-size: 1.05rem;
-    max-width: 60ch;
+    max-width: 100ch;
 }
 
 /* ---------- Main-body (conteneur générique pages secondaires) ---------- */
